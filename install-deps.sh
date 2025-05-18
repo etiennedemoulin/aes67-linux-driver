@@ -25,3 +25,8 @@ sudo apt-get remove pulseaudio
 
 git clone https://github.com/bondagit/aes67-linux-daemon
 git clone https://github.com/etiennedemoulin/linuxptp
+
+./build.sh
+
+./systemd/install.sh
+

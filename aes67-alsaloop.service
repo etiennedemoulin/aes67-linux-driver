@@ -1,0 +1,18 @@
+[Unit]
+Description=AES67 alsaloop service
+Before=multi-user.target
+After=network.target
+
+[Service]
+Type=notify
+# Will be adjusted by service during startup
+WatchdogSec=10
+
+# Run as separate user created via sysusers.d
+User=aes67-daemon
+
+EnvironmentFile=/etc/.aes67-alsaloop
+ExecStart=/usr/local/bin/alsaloop -b -c 2 -r 48000 -C ${inputDevice} -P ${outputDevice}
+
+[Install]
+WantedBy=multi-user.target

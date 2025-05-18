@@ -1,0 +1,18 @@
+[Unit]
+Description=AES67 clock master service
+Before=multi-user.target
+After=network.target
+
+[Service]
+Type=notify
+# Will be adjusted by service during startup
+WatchdogSec=10
+
+# Run as separate user created via sysusers.d
+User=aes67-daemon
+
+ExecStart=/usr/local/bin/ptp4l -i eth0 -m -l7 -E -S
+ExecStop=killall ptp4l
+
+[Install]
+WantedBy=multi-user.target
